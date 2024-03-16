@@ -13,7 +13,7 @@ const SignUp = () => {
       [e.target.id]: e.target.value
     });
   };
-console.log(formData)
+
 
   const handleSubmit = async (e) =>{
     try {
@@ -42,8 +42,6 @@ console.log(formData)
       setError(error.message);
     }
   }
-
-
 
   return (
     <div className="p-3 max-w-lg mx-auto">
