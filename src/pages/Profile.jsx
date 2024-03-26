@@ -4,6 +4,7 @@ import { getDownloadURL, getStorage, ref, uploadBytesResumable } from 'firebase/
 import {app} from '../firebase.js';
 import { deleteUserFailure, deleteUserStart, deleteUserSuccess, signInFailure, signOutUserFailure, signOutUserStart, signOutUserSuccess, updateUserFailure, updateUserStart, updateUserSuccess } from '../redux/user/userSlice.js';
 import { useDispatch } from 'react-redux';
+import ProgressBar from '../components/ProgressBar.jsx';
 
 const Profile = () => {
   const { currentUser, loading, error } = useSelector((state)=> state.user);
@@ -128,7 +129,8 @@ const Profile = () => {
      <form  onSubmit={handleSubmit} className='flex flex-col gap-4'>
       <input onChange={(e)=> setFile(e.target.files[0])} type="file" ref={fileRef} hidden accept='image/*'/>
       <img onClick={()=> fileRef.current.click()} className='rounded-full h-24 w-24 object-cover self-center mt-2' src={formData.avatar || currentUser.avatar} alt='User Image' />
-      <p className='text-sm self-center'>{fileUploadError? (<span className='text-red-700'>Error Image upload</span>) : (imgPerc > 0 && imgPerc < 100) ? (<span className='text-slate-700'>{`Uploading ${imgPerc}%`}</span>): imgPerc === 100 ? <span className='text-green-700'>Image Uploaded Successfully!</span> : "" }</p>
+      {/* <p className='text-sm self-center'>{fileUploadError? (<span className='text-red-700'>Error Image upload</span>) : (imgPerc > 0 && imgPerc < 100) ? (<span className='text-slate-700'>{`Uploading ${imgPerc}%`}</span>): imgPerc === 100 ? <span className='text-green-700'>Image Uploaded Successfully!</span> : "" }</p> */}
+      <p className='text-sm self-center'>{fileUploadError? (<span className='text-red-700'>Error Image upload</span>) : (imgPerc > 0 && imgPerc < 100) ? (<span className='text-slate-700'><ProgressBar width={imgPerc} /></span>): imgPerc === 100 ? <span className='text-green-700'>Image Uploaded Successfully!</span> : "" }</p>
       <input type="text" placeholder='username' id='username' defaultValue={currentUser.username} className='border p-3 rounded-lg' onChange={handleChange}/>
       <input type="text" placeholder='email' id='email' defaultValue={currentUser.email} className='border p-3 rounded-lg' onChange={handleChange}/>
       <input type="password" placeholder='password' id='password' className='border p-3 rounded-lg' onChange={handleChange} />
