@@ -167,7 +167,7 @@ console.log(files,formData)
                     </div>
                     <div className='flex flex-wrap gap-6'>
                         <div className='flex items-center gap-2'>
-                            <input className='p-3 border border-gray-300 rounded-lg' type="number" id="bedrooms" min='1' max='10' required />
+                            <input className='p-3 border border-gray-300 rounded-lg' type="number" id="bedrooms" min='1' max='10' required onChange={handleChange} value={formData.bedrooms}/>
                             <p>Beds</p>
                         </div>    
                         <div className='flex items-center gap-2'>
